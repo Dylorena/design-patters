@@ -1,6 +1,10 @@
 package infra
 
+import "fmt"
+
 type Config struct{}
+
+var configInstance *Config
 
 var envs = map[string]string{
 	"DB_HOST": "localhost",
@@ -9,7 +13,12 @@ var envs = map[string]string{
 }
 
 func GetConfigManager() *Config {
-	return &Config{}
+	if configInstance == nil {
+		fmt.Println("Creating new instance")
+		configInstance = &Config{}
+	}
+
+	return configInstance
 }
 
 func (c *Config) Get(key string) string {

@@ -12,6 +12,6 @@ func main() {
 	config2 := infra.GetConfigManager()
 	fmt.Println(config2.Get("APP_ENV"))
 
-	fmt.Println("Mesma instância?", config1 == config2) // true
+	fmt.Println("Same instance?", config1 == config2) // Need to be true
 
 }
