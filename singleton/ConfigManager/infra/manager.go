@@ -1,6 +1,9 @@
 package infra
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
 type Config struct{}
 
@@ -13,10 +16,15 @@ var envs = map[string]string{
 }
 
 func GetConfigManager() *Config {
-	if configInstance == nil {
-		fmt.Println("Creating new instance")
-		configInstance = &Config{}
-	}
+	fmt.Println("Lendo config...")
+
+	var once sync.Once
+	once.Do(func() {
+		if configInstance == nil {
+			fmt.Println("Creating new instance")
+			configInstance = &Config{}
+		}
+	})
 
 	return configInstance
 }
