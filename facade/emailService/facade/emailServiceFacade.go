@@ -10,9 +10,6 @@ type emailService struct {
 
 type IEmailService interface {
 	Enviar(destinatario, assunto, corpo string)
-	validaDestinatario(destinatario string) error
-	monta(destinatario, assunto, corpo string) Email
-	envia(e Email)
 }
 
 func NewEmailService() IEmailService {
