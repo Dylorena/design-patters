@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-type EmailService struct {
+type emailService struct {
 }
 
 type IEmailService interface {
@@ -16,10 +16,10 @@ type IEmailService interface {
 }
 
 func NewEmailService() IEmailService {
-	return &EmailService{}
+	return &emailService{}
 }
 
-func (es *EmailService) Enviar(destinatario, assunto, corpo string) {
+func (es *emailService) Enviar(destinatario, assunto, corpo string) {
 	err := es.validaDestinatario(destinatario)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -30,7 +30,7 @@ func (es *EmailService) Enviar(destinatario, assunto, corpo string) {
 	es.envia(email)
 }
 
-func (es *EmailService) validaDestinatario(destinatario string) error {
+func (es *emailService) validaDestinatario(destinatario string) error {
 	fmt.Println("📬 Validando email:", destinatario)
 	if strings.Contains(destinatario, "@") {
 		return nil
@@ -39,7 +39,7 @@ func (es *EmailService) validaDestinatario(destinatario string) error {
 	return fmt.Errorf("❌ Email inválido. Cancelando envio")
 }
 
-func (es *EmailService) monta(destinatario, assunto, corpo string) Email {
+func (es *emailService) monta(destinatario, assunto, corpo string) Email {
 	fmt.Println("✉️ Montando e-mail...")
 
 	return Email{
@@ -50,7 +50,7 @@ func (es *EmailService) monta(destinatario, assunto, corpo string) Email {
 	}
 }
 
-func (es EmailService) envia(e Email) {
+func (es emailService) envia(e Email) {
 	fmt.Println(e)
 	fmt.Println("✅ Email enviado com sucesso!")
 }
